@@ -34,7 +34,7 @@ function to_ss() {
 }
 
 function logs() {
-    local cmd="docker logs $ss_container"
+    local cmd="docker logs -f $ss_container"
     run_cmd "$cmd"
 }
 
