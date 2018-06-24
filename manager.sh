@@ -11,7 +11,7 @@ source $PWD/appupy/bash-files/base.sh
 function run() {
     local cmd="docker run --name $ss_container"
     cmd="$cmd -v $ss_config_in_host:$ss_config_in_container"
-    cmd="$cmd -p 8989:8989"
+    cmd="$cmd -p 8989:80"
     cmd="$cmd -d $ss_image ssserver -c $ss_config_in_container"
     run_cmd "$cmd"
 }
