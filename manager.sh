@@ -1,7 +1,8 @@
+ss_image_name='ss-alpine'
 ss_image_version=1.0.0
-ss_image="docker.kiuber.me/ss-alpine:$ss_image_version"
+ss_image="docker.kiuber.me/$ss_image_name:$ss_image_version"
 
-ss_container='ss-alpine'
+ss_container='ss'
 
 ss_config_in_host="$PWD/config/shadowsocks.json"
 ss_config_in_container='/etc/shadowsocks.json'
