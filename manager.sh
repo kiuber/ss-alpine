@@ -7,11 +7,15 @@ ss_container='ss'
 ss_config_in_host="$PWD/config/shadowsocks.json"
 ss_config_in_container='/etc/shadowsocks.json'
 
+py_files_in_host="$PWD/appupy/py-files"
+py_files_in_container='/opt'
+
 source $PWD/appupy/bash-files/base.sh
 
 function run() {
     local cmd="docker run --name $ss_container"
     cmd="$cmd -v $ss_config_in_host:$ss_config_in_container"
+    cmd="$cmd -v $py_files_in_host:$py_files_in_container"
     cmd="$cmd -p 8127:80"
     cmd="$cmd -d $ss_image ssserver -c $ss_config_in_container"
     run_cmd "$cmd"
@@ -28,6 +32,13 @@ function start() {
 function restart() {
     remove_container $ss_container
     run
+}
+
+function show_qrcode() {
+    local hostname=$2
+    local port=$3
+    local cmd='python /opt/qrcode.py $hostname $port'
+    _send_cmd_to_container $ss_container "$cmd"
 }
 
 function to_ss() {
@@ -48,6 +59,7 @@ function help() {
             start 
             restart
 
+            show_qrcode (\$hostname, \$port)
             to_ss
 
             logs
