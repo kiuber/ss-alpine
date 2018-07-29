@@ -10,7 +10,7 @@ ss_config_in_container='/etc/shadowsocks.json'
 py_files_in_host="$PWD/appupy/py-files"
 py_files_in_container='/opt'
 
-source $PWD/appupy/bash-files/base.sh
+source $PWD/appupy/base-bash/base.sh
 
 function run() {
     local cmd="docker run --name $ss_container"
