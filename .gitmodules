@@ -1,0 +1,3 @@
+[submodule "appupy/base-bash"]
+	path = appupy/base-bash
+	url = git@gitee.com:Kiuber/base-bash.git

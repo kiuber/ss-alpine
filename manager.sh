@@ -10,7 +10,8 @@ ss_config_in_container='/etc/shadowsocks.json'
 py_files_in_host="$PWD/appupy/py-files"
 py_files_in_container='/opt'
 
-source $PWD/appupy/base-bash/base.sh
+source "$PWD/appupy/base-bash/_base.sh"
+source "$PWD/appupy/base-bash/_docker.sh"
 
 function run() {
     local cmd="docker run --name $ss_container"
@@ -18,11 +19,11 @@ function run() {
     cmd="$cmd -v $py_files_in_host:$py_files_in_container"
     cmd="$cmd -p 8127:80"
     cmd="$cmd -d $ss_image ssserver -c $ss_config_in_container"
-    run_cmd "$cmd"
+    _run_cmd "$cmd"
 }
 
 function stop() {
-    remove_container $ss_container
+    _remove_container $ss_container
 }
 
 function start() {
@@ -30,7 +31,7 @@ function start() {
 }
 
 function restart() {
-    remove_container $ss_container
+    _remove_container $ss_container
     run
 }
 
@@ -47,7 +48,7 @@ function to_ss() {
 
 function logs() {
     local cmd="docker logs -f $ss_container"
-    run_cmd "$cmd"
+    _run_cmd "$cmd"
 }
 
 function help() {
