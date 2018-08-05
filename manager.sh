@@ -1,6 +1,8 @@
+domain='docker.kiuber.me'
+
 ss_image_name='ss-alpine'
 ss_image_version=1.0.0
-ss_image="docker.kiuber.me/$ss_image_name:$ss_image_version"
+ss_image="$domain/$ss_image_name:$ss_image_version"
 
 ss_container='ss'
 
@@ -12,6 +14,11 @@ py_files_in_container='/opt'
 
 source "$PWD/appupy/base-bash/_base.sh"
 source "$PWD/appupy/base-bash/_docker.sh"
+
+function build_ss() {
+    local cmd="docker build -t $ss_image $PWD/docker"
+    _run_cmd "$cmd"
+}
 
 function run() {
     local cmd="docker run --name $ss_container"
@@ -55,6 +62,8 @@ function help() {
     cat <<-EOF
 
         Valid options are:
+            build_ss
+
             run
             stop
             start 
