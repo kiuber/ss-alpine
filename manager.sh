@@ -20,6 +20,10 @@ function build_ss() {
     _run_cmd "$cmd"
 }
 
+function build_images() {
+    build_ss
+}
+
 function run() {
     local cmd="docker run --name $ss_container"
     cmd="$cmd -v $ss_config_in_host:$ss_config_in_container"
@@ -62,7 +66,7 @@ function help() {
     cat <<-EOF
 
         Valid options are:
-            build_ss
+            build_images
 
             run
             stop
