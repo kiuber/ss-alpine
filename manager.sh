@@ -29,7 +29,7 @@ function run() {
     cmd="$cmd -v $ss_config_in_host:$ss_config_in_container"
     cmd="$cmd -v $py_files_in_host:$py_files_in_container"
     cmd="$cmd -p 8127:80"
-    cmd="$cmd -d $ss_image ssserver -c $ss_config_in_container"
+    cmd="$cmd -d --privileged=true $ss_image ssserver -c $ss_config_in_container"
     _run_cmd "$cmd"
 }
 
